@@ -3,7 +3,7 @@ package com.reactive.sec01;
 import com.reactive.utils.Utils;
 import reactor.core.publisher.Mono;
 
-public class Lec04MonSubscribeRefactor {
+public class Lec04MonoSubscribeRefactor {
     public static void main(String[] args) {
         // publisher
         Mono<String> mono = Mono.just("Hello World");
