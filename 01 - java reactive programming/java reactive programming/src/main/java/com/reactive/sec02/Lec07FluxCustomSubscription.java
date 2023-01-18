@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Log07FluxCustomSubscription {
+public class Lec07FluxCustomSubscription {
     public static void main(String[] args) {
 
         final AtomicReference<Subscription> atomicReference = new AtomicReference<>();
