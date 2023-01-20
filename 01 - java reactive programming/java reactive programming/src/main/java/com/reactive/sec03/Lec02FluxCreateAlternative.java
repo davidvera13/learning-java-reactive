@@ -9,8 +9,15 @@ public class Lec02FluxCreateAlternative {
         NameProducer nameProducer = new NameProducer();
         Flux.create(nameProducer)
                 .subscribe(Utils.subscriber("RefactorFluxCreation"));
-
         nameProducer.produce();
+        System.out.println("******************");
+        // Runnable runnable = () -> nameProducer.produce();
+        Runnable runnable = nameProducer::produce;
+        for (int i = 0; i < 10; i++) {
+            // running 10 threads
+            new Thread(runnable).start();
+        }
 
+        Utils.sleepSeconds(3);
     }
 }
