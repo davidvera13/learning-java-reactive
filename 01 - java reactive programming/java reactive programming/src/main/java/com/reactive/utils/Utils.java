@@ -24,8 +24,11 @@ public class Utils {
     }
 
     public static void sleepSeconds(int seconds) {
+        sleepMilliseconds(seconds * 1000);
+    }
+    public static void sleepMilliseconds(int ms) {
         try {
-            Thread.sleep(seconds * 1000L);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
