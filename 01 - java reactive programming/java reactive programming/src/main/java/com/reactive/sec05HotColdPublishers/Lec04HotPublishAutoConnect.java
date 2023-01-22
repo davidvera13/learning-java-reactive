@@ -6,7 +6,7 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 import java.util.stream.Stream;
 
-public class Lec03HotPublishAutoConnect {
+public class Lec04HotPublishAutoConnect {
     // in the publisher / subscriber concept, nothing happens until the subscriber subscribes to the publisher.
     // publisher emits data to the subscriber based on the request to the subscriber
     // 2 case:
@@ -16,7 +16,7 @@ public class Lec03HotPublishAutoConnect {
     //                   producer for all the subscribers. All subscribers share the same stream
     public static void main(String[] args) {
         // share = publish().refCount()
-        Flux<String> movieStream = Flux.fromStream(Lec03HotPublishAutoConnect::getMovie)
+        Flux<String> movieStream = Flux.fromStream(Lec04HotPublishAutoConnect::getMovie)
                 .delayElements(Duration.ofSeconds(1))
                 .publish()
                 .autoConnect(0);// we can define that the flux starts with 2 subscribers ....
