@@ -7,6 +7,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
+/**
+ * Objective
+ * let's consider we have to process orders from 2 different kind: automotive and kids.
+ * the orders are handled in two different way:
+ * > for automotive we have to add 10% VAT
+ * > for kids we have 50% discount + free product in the order
+ * each kids order
+ *
+ */
 public class App {
     public static void main(String[] args) {
 
