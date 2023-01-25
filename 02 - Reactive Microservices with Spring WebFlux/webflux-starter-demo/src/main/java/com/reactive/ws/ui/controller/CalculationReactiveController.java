@@ -1,19 +1,18 @@
 package com.reactive.ws.ui.controller;
 
+import com.reactive.ws.ui.dto.CalculationRequestDto;
 import com.reactive.ws.ui.dto.ResponseDto;
 import com.reactive.ws.ui.service.CalculationReactiveService;
 import com.reactive.ws.ui.service.CalculationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.json.AbstractJackson2Encoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * this controller returns classic rest call and has delay for multiplication
@@ -56,4 +55,15 @@ public class CalculationReactiveController {
     public Flux<ResponseDto> multiplicationTableStreamV2(@PathVariable("input") int input) {
         return service.multiplicationTableV2(input);
     }
+
+    @PostMapping(
+            value = "operation"
+    )
+    public Mono<ResponseDto> doOperation(@RequestBody Mono<CalculationRequestDto> mono,
+                                         @RequestHeader Map<String, String> headers) {
+        System.out.println("headers " + headers);
+        // works like Mono<List<ResponseDto>>
+        return service.doOperation(mono);
+    }
+
 }
