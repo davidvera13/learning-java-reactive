@@ -1,7 +1,9 @@
 package com.reactive.ws.ui.config;
 
 import com.reactive.ws.ui.dto.CalculationRequestDto;
+import com.reactive.ws.ui.dto.ErrorResponse;
 import com.reactive.ws.ui.dto.ResponseDto;
+import com.reactive.ws.ui.exceptions.InputValidationException;
 import com.reactive.ws.ui.service.CalculationReactiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -46,10 +48,19 @@ public class RequestHandler {
         // convert the request body to a mono
         Mono<CalculationRequestDto> mono = serverRequest.bodyToMono(CalculationRequestDto.class);
         Mono<ResponseDto> responseDtoMono =  this.service.doOperation(mono);
-
         return ServerResponse.ok()
                 .body(responseDtoMono, ResponseDto.class);
+    }
 
+
+    public Mono<ServerResponse> squareWithValidationHandler(ServerRequest serverRequest) {
+        int input = Integer.parseInt(serverRequest.pathVariable("input"));
+        if(input < 10|| input > 20 ) {
+            return Mono.error(new InputValidationException(input));
+        }
+
+        Mono<ResponseDto> responseDtoMono = this.service.findSquare(input);
+        return ServerResponse.ok().body(responseDtoMono, ResponseDto.class);
     }
 
 }
