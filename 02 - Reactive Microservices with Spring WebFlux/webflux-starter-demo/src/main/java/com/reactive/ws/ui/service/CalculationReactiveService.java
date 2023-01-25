@@ -27,4 +27,17 @@ public class CalculationReactiveService {
                 .doOnNext(i ->  System.out.println("CalculationService processing value " + i))
                 .map(i -> new ResponseDto(i * input));
     }
+
+    public Flux<ResponseDto> multiplicationTableV2(int input) {
+        // BAD PRACTICE ... 
+        // this works fine BUT, if we stop the browser from collecting data, this will not be communicated here
+        // the process will go until it completes
+        List<ResponseDto> list = IntStream.rangeClosed(1, 10)
+                .peek(i -> Utils.sleepSeconds(1))       // we peek each value from range and wait 1 second
+                .peek(i -> System.out.println("CalculationService processing value " + i))
+                .mapToObj(i -> new ResponseDto(i * input))
+                .collect(Collectors.toList());
+
+        return Flux.fromIterable(list);
+    }
 }

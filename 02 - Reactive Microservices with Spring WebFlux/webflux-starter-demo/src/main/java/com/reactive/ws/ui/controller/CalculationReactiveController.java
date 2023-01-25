@@ -48,4 +48,12 @@ public class CalculationReactiveController {
     public Flux<ResponseDto> multiplicationTableStream(@PathVariable("input") int input) {
         return service.multiplicationTable(input);
     }
+
+    @GetMapping(
+            value = "multiplication/{input}/streamV2",
+            produces = MediaType.TEXT_EVENT_STREAM_VALUE
+    )
+    public Flux<ResponseDto> multiplicationTableStreamV2(@PathVariable("input") int input) {
+        return service.multiplicationTableV2(input);
+    }
 }
