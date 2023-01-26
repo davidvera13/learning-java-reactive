@@ -5,10 +5,7 @@ import com.reactive.ws.ui.exceptions.InputValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
-import org.springframework.web.reactive.function.server.ServerRequest;
-import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.reactive.function.server.*;
 import reactor.core.publisher.Mono;
 
 import java.util.function.BiFunction;
@@ -35,11 +32,20 @@ public class RouterConfig {
                 .build();
     }
 
-    // create sub "routes
+    // create sub "routes: beans declaration is not required
     private RouterFunction<ServerResponse> serverResponseCustomUrlRouterFunction() {
         /// the routes will start with /customUrl
         return RouterFunctions.route()
-                .GET("square/{input}", requestHandler::squareHandler)
+                // using request predicate: we pass a pattern, number should start with 1 and have a second number from 1 to 9
+                // url must contain 10, 11, 12...19, if patterns is ok, the request handler method is called
+                .GET(
+                        "square/{input}",
+                        RequestPredicates.path("*/1?").or(RequestPredicates.path("*/20")),
+                        requestHandler::squareHandler)
+                // if pattern is not followed...
+                .GET(
+                        "square/{input}",
+                        request -> ServerResponse.badRequest().bodyValue("Only 10 - 19 allowed"))
                 .GET("multiplication/{input}", requestHandler::tableHandler)
                 .GET("multiplication/{input}/stream", requestHandler::tableStreamingHandler)
                 .POST("operation", requestHandler::doOperationHandler)
