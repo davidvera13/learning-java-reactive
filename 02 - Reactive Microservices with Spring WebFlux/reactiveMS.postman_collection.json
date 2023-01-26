@@ -1,0 +1,766 @@
+{
+	"info": {
+		"_postman_id": "73133564-c6ff-4a69-afd3-e867a3b5ac87",
+		"name": "reactiveMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5840420"
+	},
+	"item": [
+		{
+			"name": "rest api",
+			"item": [
+				{
+					"name": "square value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calc/square/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calc",
+								"square",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "multiplicationTable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calc/multiplication/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calc",
+								"multiplication",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rest api reactive",
+			"item": [
+				{
+					"name": "controllers",
+					"item": [
+						{
+							"name": "square value",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/reactiveCalc/square/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reactiveCalc",
+										"square",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplicationTable",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/reactiveCalc/multiplication/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reactiveCalc",
+										"multiplication",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplicationTable stream",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/reactiveCalc/multiplication/5/stream",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reactiveCalc",
+										"multiplication",
+										"5",
+										"stream"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "operations",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "some-key",
+										"value": "some-value",
+										"type": "text"
+									},
+									{
+										"key": "some-other-key",
+										"value": "some-other-value",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"a\": 12,\r\n    \"b\": 0,\r\n    \"operation\": \"sum\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/reactiveCalc/operation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reactiveCalc",
+										"operation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "square value exception handling",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/validator/square/5/throw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"validator",
+										"square",
+										"5",
+										"throw"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "square value exception handling mono",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/validator/square/5/mono-error",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"validator",
+										"square",
+										"5",
+										"mono-error"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "square value filtering",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/validator/square/7/filter-values",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"validator",
+										"square",
+										"7",
+										"filter-values"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "functional",
+					"item": [
+						{
+							"name": "square value functional endpoint",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/router/square/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"router",
+										"square",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplication table functional endpoint",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/router/multiplication/11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"router",
+										"multiplication",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplication table functional endpoint stream",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/router/multiplication/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"router",
+										"multiplication",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "operations functional endpoint",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "some-key",
+										"value": "some-value",
+										"type": "text"
+									},
+									{
+										"key": "some-other-key",
+										"value": "some-other-value",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"a\": 12,\r\n    \"b\": 16,\r\n    \"operation\": \"sum\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/router/operation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"router",
+										"operation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "square value functional with validator Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/router/squareWithValidation/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"router",
+										"squareWithValidation",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "functional path",
+					"item": [
+						{
+							"name": "square value functional endpoint",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/customUrl/square/11",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customUrl",
+										"square",
+										"11"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplication table functional endpoint",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/customUrl/multiplication/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customUrl",
+										"multiplication",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplication table functional endpoint stream",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/customUrl/multiplication/5/stream",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customUrl",
+										"multiplication",
+										"5",
+										"stream"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "operations functional endpoint",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "some-key",
+										"value": "some-value",
+										"type": "text"
+									},
+									{
+										"key": "some-other-key",
+										"value": "some-other-value",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"a\": 12,\r\n    \"b\": 0,\r\n    \"operation\": \"sum\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/customUrl/operation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customUrl",
+										"operation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "square value functional with validator Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/customUrl/squareWithValidation/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customUrl",
+										"squareWithValidation",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "functional path 2nd bean",
+					"item": [
+						{
+							"name": "square value functional endpoint",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/other/square/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"other",
+										"square",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplication table functional endpoint",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/other/multiplication/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"other",
+										"multiplication",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "multiplication table functional endpoint stream",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/other/multiplication/5/stream",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"other",
+										"multiplication",
+										"5",
+										"stream"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "operations functional endpoint",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "some-key",
+										"value": "some-value",
+										"type": "text"
+									},
+									{
+										"key": "some-other-key",
+										"value": "some-other-value",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"a\": 12,\r\n    \"b\": 0,\r\n    \"operation\": \"sum\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/other/operation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"other",
+										"operation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "square value functional with validator Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/other/squareWithValidation/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"other",
+										"squareWithValidation",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "using predicates",
+					"item": [
+						{
+							"name": "sum",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "op",
+										"value": "+",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/calculator/5/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"calculator",
+										"5",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sub",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "op",
+										"value": "-",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/calculator/5/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"calculator",
+										"5",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mult",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "op",
+										"value": "*",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/calculator/5/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"calculator",
+										"5",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "div",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "op",
+										"value": "/",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/calculator/5/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"calculator",
+										"5",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "div error",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "op",
+										"value": "/",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/calculator/5/0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"calculator",
+										"5",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
