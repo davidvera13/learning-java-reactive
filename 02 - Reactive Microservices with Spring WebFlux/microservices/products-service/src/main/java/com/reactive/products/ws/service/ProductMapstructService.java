@@ -1,6 +1,7 @@
 package com.reactive.products.ws.service;
 
 import com.reactive.products.ws.dto.ProductDto;
+import com.reactive.products.ws.io.entity.Product;
 import com.reactive.products.ws.io.repository.ProductRepository;
 import com.reactive.products.ws.mappers.EntitoDtoMappers;
 import com.reactive.products.ws.mappers.ProductMapper;
@@ -35,10 +36,10 @@ public class ProductMapstructService {
                 .map(ProductMapper.INSTANCE::dtoToEntity)                   // convert dto to entity
                 .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
                 .map(ProductMapper.INSTANCE::entityToDto);                  // returning entity converted to dto
-        //return productDtoMono
-        //        .map(dto -> ProductMapper.INSTANCE.dtoToEntity(dto))                 // convert dto to entity
-        //        .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
-        //        .map(entity -> ProductMapper.INSTANCE.entityToDto(entity));             // returning entity converted to dto
+//        return productDtoMono
+//                .map(dto -> ProductMapper.INSTANCE.dtoToEntity(dto))                 // convert dto to entity
+//                .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
+//                .map(entity -> ProductMapper.INSTANCE.entityToDto(entity));             // returning entity converted to dto
     }
 
     public Mono<ProductDto> update(String id, Mono<ProductDto> productDtoMono) {
