@@ -3,60 +3,51 @@ package com.reactive.products.ws.service;
 import com.reactive.products.ws.dto.ProductDto;
 import com.reactive.products.ws.io.repository.ProductRepository;
 import com.reactive.products.ws.mappers.EntitoDtoMappers;
+import com.reactive.products.ws.mappers.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Range;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 @Service
-public class ProductService {
+public class ProductMapstructService {
     ProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductMapstructService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     public Flux<ProductDto> findAll() {
         return this.productRepository.findAll()
                 //.map(product -> EntitoDtoMappers.toDto(product))
-                .map(EntitoDtoMappers::toDto);
+                .map(ProductMapper.INSTANCE::entityToDto);
     }
 
     public Mono<ProductDto> findById(String id) {
         return this.productRepository.findById(id)
-                .map(EntitoDtoMappers::toDto);
+                .map(ProductMapper.INSTANCE::entityToDto);
     }
 
     public Mono<ProductDto> insert(Mono<ProductDto> productDtoMono) {
         return productDtoMono
-                .map(dto -> EntitoDtoMappers.toEntity(dto))                 // convert dto to entity
+                .map(ProductMapper.INSTANCE::dtoToEntity)                   // convert dto to entity
                 .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
-                .map(entity -> EntitoDtoMappers.toDto(entity));             // returning entity converted to dto
-
+                .map(ProductMapper.INSTANCE::entityToDto);                  // returning entity converted to dto
         //return productDtoMono
-        //        .map(EntitoDtoMappers::toEntity)                 // convert dto to entity
+        //        .map(dto -> ProductMapper.INSTANCE.dtoToEntity(dto))                 // convert dto to entity
         //        .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
-        //        .map(EntitoDtoMappers::toDto);             // returning entity converted to dto
+        //        .map(entity -> ProductMapper.INSTANCE.entityToDto(entity));             // returning entity converted to dto
     }
 
     public Mono<ProductDto> update(String id, Mono<ProductDto> productDtoMono) {
-        //return this.productRepository.findById(id)                  // the query returns an entity object
-        //        .flatMap(entity -> productDtoMono
-        //                .map(dto -> EntitoDtoMappers.toEntity(dto))
-        //                .doOnNext(e -> e.setId(id)))
-        //        .flatMap(entity -> this.productRepository.save(entity))
-        //        .map(entity -> EntitoDtoMappers.toDto(entity));
-
         return this.productRepository.findById(id)                  // the query returns an entity object
                 .flatMap(entity -> productDtoMono
-                        .map(EntitoDtoMappers::toEntity)
+                        .map(ProductMapper.INSTANCE::dtoToEntity)
                         .doOnNext(productEntity -> productEntity.setId(id)))
                 .flatMap(productEntity -> this.productRepository.save(productEntity))
-                .map(EntitoDtoMappers::toDto);
+                .map(ProductMapper.INSTANCE::entityToDto);
     }
 
     public Mono<Void> delete(String id) {
@@ -64,9 +55,8 @@ public class ProductService {
     }
 
     public Flux<ProductDto> getByPriceRange(int min, int max) {
-        //return this.productRepository.findAllByPriceBetween(min, max)
         return this.productRepository.findAllByPriceBetween(Range.closed(min, max))
                 //.map(product -> EntitoDtoMappers.toDto(product))
-                .map(EntitoDtoMappers::toDto);
+                .map(ProductMapper.INSTANCE::entityToDto);
     }
 }
