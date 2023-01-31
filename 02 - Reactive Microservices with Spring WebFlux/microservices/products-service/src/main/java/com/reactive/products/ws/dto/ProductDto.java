@@ -1,10 +1,11 @@
 package com.reactive.products.ws.dto;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @ToString
+@Builder
+@AllArgsConstructor @NoArgsConstructor
 public class ProductDto {
     private String id;
     private String description;
