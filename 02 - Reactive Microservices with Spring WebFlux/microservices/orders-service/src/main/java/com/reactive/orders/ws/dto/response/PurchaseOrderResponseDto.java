@@ -14,5 +14,5 @@ public class PurchaseOrderResponseDto {
     private Long userId;
     private String productId;
     private double amount;
-    private OrderStatus orderStatus;
+    private OrderStatus status;
 }

@@ -15,10 +15,10 @@ public class PurchaseOrder {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String productId;
-    private Integer userId;
-    private Integer amount;
+    private Long userId;
+    private Double amount;
     private OrderStatus status;
 
 }
