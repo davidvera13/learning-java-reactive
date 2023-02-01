@@ -1,0 +1,28 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+#      - POSTGRES_DB=webservices
+    volumes:
+      - "./volumes/postgresql:/var/lib/postgresql/data"
+      - "./sql/create-db.sql:/docker-entrypoint-initdb.d/create-db.sql"
+    ports:
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@root.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - "./volumes/pgadmin:/var/lib/pgadmin"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres

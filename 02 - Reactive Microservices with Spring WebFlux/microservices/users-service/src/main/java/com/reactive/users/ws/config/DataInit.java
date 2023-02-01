@@ -16,17 +16,16 @@ import java.nio.charset.StandardCharsets;
 public class DataInit implements CommandLineRunner {
 
     // getting files from classpath
-    @Value("classpath:h2/h2Init.sql")
+    //@Value("classpath:h2/h2Init.sql")
+    @Value("classpath:h2/postgres.sql")
     private Resource initSql;
 
     private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
-    private final UserService userService;
 
     @Autowired
-    public DataInit(R2dbcEntityTemplate r2dbcEntityTemplate, UserService userService) {
+    public DataInit(R2dbcEntityTemplate r2dbcEntityTemplate) {
         this.r2dbcEntityTemplate = r2dbcEntityTemplate;
-        this.userService = userService;
     }
 
     @Override
