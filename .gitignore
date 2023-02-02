@@ -3,3 +3,6 @@
 02 - Reactive Microservices with Spring WebFlux/webflux-starter-demo/.mvn
 02 - Reactive Microservices with Spring WebFlux/microservices/products-service/mongo
 02 - Reactive Microservices with Spring WebFlux/microservices/users-service/volumes
+*.idea
+*target
+*.iml
