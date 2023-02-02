@@ -34,8 +34,8 @@ public class DataInit implements CommandLineRunner {
     }
 
     private Flux<ProductDto> newProducts(){
-        return Flux.range(1, 50)
-                .delayElements(Duration.ofMillis(125))
+        return Flux.range(1, 1000)
+                .delayElements(Duration.ofMillis(2000))
                 .map(i -> ProductDto.builder()
                         .description("product-" + i)
                         .price(ThreadLocalRandom.current().nextDouble(10.0, 100.0))

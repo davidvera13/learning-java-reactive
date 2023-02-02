@@ -8,16 +8,19 @@ import org.springframework.data.domain.Range;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
+import reactor.core.publisher.Sinks;
 
 @Service
 public class ProductService {
     ProductRepository productRepository;
 
+    private final Sinks.Many<ProductDto> sinks;
+
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository,
+                          Sinks.Many<ProductDto> sinks) {
         this.productRepository = productRepository;
+        this.sinks = sinks;
     }
 
     public Flux<ProductDto> findAll() {
@@ -35,8 +38,8 @@ public class ProductService {
         return productDtoMono
                 .map(dto -> EntitoDtoMappers.toEntity(dto))                 // convert dto to entity
                 .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
-                .map(entity -> EntitoDtoMappers.toDto(entity));             // returning entity converted to dto
-
+                .map(entity -> EntitoDtoMappers.toDto(entity))             // returning entity converted to dto
+                .doOnNext(this.sinks::tryEmitNext);
         //return productDtoMono
         //        .map(EntitoDtoMappers::toEntity)                 // convert dto to entity
         //        .flatMap(entity -> this.productRepository.insert(entity))   // storing entity and retrieving response
