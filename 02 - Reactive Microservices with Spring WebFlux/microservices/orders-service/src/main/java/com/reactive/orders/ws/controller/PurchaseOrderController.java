@@ -29,7 +29,9 @@ public class PurchaseOrderController {
     public Mono<ResponseEntity<PurchaseOrderResponseDto>> order(@RequestBody Mono<PurchaseOrderRequestDto> requestDtoMono){
         return this.orderFulfillmentService.processOrder(requestDtoMono)
                 .map(ResponseEntity::ok)
+                // we check exception, first one may be a bad request sent
                 .onErrorReturn(WebClientResponseException.class, ResponseEntity.badRequest().build())
+                // second exception is when for a reason other webservice is down
                 .onErrorReturn(WebClientRequestException.class, ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build());
     }
 

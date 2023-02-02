@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -26,6 +28,9 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public Mono<ResponseEntity<ProductDto>> findById(@PathVariable("id") String id) {
+        // try to throw exception
+        // this.fakeRandomException();
+
         return this.productService.findById(id)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
@@ -51,5 +56,12 @@ public class ProductController {
     @GetMapping("/search")
     public Flux<ProductDto> getByPriceRange(@RequestParam("min") int min, @RequestParam("max") int max) {
         return this.productService.getByPriceRange(min, max);
+    }
+
+    // we want to fake failure
+    private void fakeRandomException() {
+        int nextInt = ThreadLocalRandom.current().nextInt(1, 10);
+        if(nextInt > 5)
+            throw new RuntimeException("Ooops something went wrong...");
     }
 }

@@ -22,7 +22,7 @@ public class UserClient {
     public Flux<UserDto> getUsers(){
         return this.webClient
                 .get()
-                // .uri("all")
+                 //.uri("")
                 .retrieve()
                 .bodyToFlux(UserDto.class);
     }

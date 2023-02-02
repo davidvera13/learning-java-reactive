@@ -48,6 +48,8 @@ public class OrderFulfillmentService {
     private Mono<RequestContext> productRequestResponse(RequestContext rc){
         return this.productClient.getProductById(rc.getPurchaseOrderRequestDto().getProductId())
                 .doOnNext(rc::setProductDto)
+                // we want to relaunch query 5 times if we didn't get response
+                // .retry(5)
                 .retryWhen(Retry.fixedDelay(5, Duration.ofSeconds(1)))
                 .thenReturn(rc);
     }
