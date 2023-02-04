@@ -34,3 +34,24 @@ option java_package="com.proto.models";
 ```
 
 this option adds package to the class
+
+# Generating class for javascript
+
+Using a terminal, go to the folder proto and type the following command line
+```
+..\..\..\target\protoc-plugins\protoc-3.22.0-rc-1-windows-x86_64.exe --js_out=./ *.proto
+```
+
+protoc-gen-js' is not recognized as an internal or external command
+To solve the issue: 
+
+```
+A simpler workaround(other than downgrading) is to download the executable from https://github.com/protocolbuffers/protobuf-javascript/releases and add it to your PATH. Then it will work as expected
+commande line is 
+For check: 
+λ protoc --version
+libprotoc 3.20.1
+
+For generation:
+λ protoc --js_out=./ *.proto
+```

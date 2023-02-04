@@ -1,15 +1,13 @@
-// note the number after field indicates field order
-// this defines the person class
-// executes maven compile
-// in target/protoc-pu
-// in target/generated-sources/protobuf/java we have generated classes
-
-//
 syntax = "proto3";
 option java_multiple_files=true;
 option java_package="com.protobuf.app.models";
 
+/*
+Person class
+ */
 message Person {
+  // person name
   string name = 1;
+  // person age
   int32 age = 2;
 }
