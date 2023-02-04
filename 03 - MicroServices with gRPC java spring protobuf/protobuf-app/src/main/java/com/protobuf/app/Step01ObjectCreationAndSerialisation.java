@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Main {
+public class Step01ObjectCreationAndSerialisation {
     public static void main(String[] args) throws IOException {
         // using generated claas
         Person person = Person.newBuilder()
