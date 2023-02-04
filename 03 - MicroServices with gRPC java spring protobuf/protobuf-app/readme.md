@@ -55,3 +55,17 @@ libprotoc 3.20.1
 For generation:
 λ protoc --js_out=./ *.proto
 ```
+
+### primitive types
+
+| Java                | proto              |
+|---------------------|--------------------|
+| int                 | int32              |
+| long                | int64              |
+| float               | float              |   
+| double              | double             |
+| boolean             | bool               |
+| string              | string             |
+| byte[]              | bytes              |
+
+

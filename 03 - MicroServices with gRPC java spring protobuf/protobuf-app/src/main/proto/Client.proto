@@ -1,0 +1,29 @@
+syntax = "proto3";
+option java_multiple_files=true;
+option java_package="com.protobuf.app.models";
+
+/*
+Person class
+ */
+message Client {
+  // person name
+  string name = 1;
+  // person age
+  int32 age = 2;
+
+  // composition
+  Address address = 3;
+  Car car = 4;
+}
+
+message Address {
+  int32 postBox = 1;
+  string street = 2;
+  string city = 3;
+}
+
+message Car {
+  string make = 1;
+  string model = 2;
+  int32 year = 3;
+}
