@@ -7,7 +7,7 @@
 //
 syntax = "proto3";
 option java_multiple_files=true;
-option java_package="com.proto.models";
+option java_package="com.protobuf.app.models";
 
 message Person {
   string name = 1;
