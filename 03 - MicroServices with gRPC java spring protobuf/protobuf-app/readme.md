@@ -69,3 +69,10 @@ For generation:
 | byte[]              | bytes              |
 
 
+
+### Collections & map
+
+| Java              | proto    |
+|-------------------|----------|
+| Collection / list | repeated |
+| map               | map      |

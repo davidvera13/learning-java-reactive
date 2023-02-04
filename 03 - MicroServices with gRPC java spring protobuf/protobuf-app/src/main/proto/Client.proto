@@ -13,7 +13,7 @@ message Client {
 
   // composition
   Address address = 3;
-  Car car = 4;
+  repeated Car cars = 4;
 }
 
 message Address {
@@ -26,4 +26,8 @@ message Car {
   string make = 1;
   string model = 2;
   int32 year = 3;
+}
+
+message CarDealer {
+  map<int32 , Car> models=1;
 }
