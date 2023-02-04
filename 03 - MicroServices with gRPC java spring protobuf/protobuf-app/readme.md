@@ -76,3 +76,20 @@ For generation:
 |-------------------|----------|
 | Collection / list | repeated |
 | map               | map      |
+
+
+### Default values
+
+| Java     | proto               |
+|----------|---------------------|
+| int32    | 0                   |
+| int64    | 0                   |
+| float    | 0                   |   
+| double   | 0                   |
+| bool     | false               |
+| string   | empty string        |
+| enum     | first value         |
+| repeated | empty list          |   
+| map      | wrapper / empty map |   
+
+
