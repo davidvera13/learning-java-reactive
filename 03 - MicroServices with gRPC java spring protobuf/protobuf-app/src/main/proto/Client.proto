@@ -26,8 +26,16 @@ message Car {
   string make = 1;
   string model = 2;
   int32 year = 3;
+  BodyStyle bodyStyle=4;
 }
 
 message CarDealer {
   map<int32 , Car> models=1;
+}
+
+enum BodyStyle {
+  UNDEFINED = 0;
+  SEDAN = 1;
+  COUPE = 2;
+  SUV=3;
 }
