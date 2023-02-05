@@ -1,0 +1,20 @@
+/**
+it is important to note that the bank-service.proto must be the same than the one used in the grpc-app project.
+If there are difference, it may impact on the application behavior even though there will be compatibility remaining
+ */
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.grpc.models";
+
+message BalanceCheckRequest {
+  int32 account_number = 1;
+}
+message Balance {
+  int32 amount = 1;
+}
+
+service BankService {
+  //unary
+  rpc getBalance(BalanceCheckRequest) returns (Balance);
+}
