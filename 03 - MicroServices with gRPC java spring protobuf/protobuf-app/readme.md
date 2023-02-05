@@ -267,3 +267,7 @@ Type type = 3;
 int32 price=4; // the good practice is to add a new tag for this property
 }
 ````
+
+## Recommendations
+
+![img.png](img/02.png)
