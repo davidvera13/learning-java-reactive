@@ -11,6 +11,7 @@ public class GrpcServer {
         // client calls are in the test package
         Server server = ServerBuilder.forPort(6789)
                 .addService(new BankService())
+                .addService(new TransferService())
                 .build();
 
         server.start();
