@@ -24,10 +24,20 @@ public class Step01BankUnaryCallBlocking {
 
     @Test
     void getBalanceTest() {
-        BalanceCheckRequest balanceCheckRequest = BalanceCheckRequest.newBuilder()
+        BalanceCheckRequest balanceCheckRequest;
+        Balance balance;
+
+        balanceCheckRequest = BalanceCheckRequest.newBuilder()
                 .setAccountNumber(5)
                 .build();
-        Balance balance = this.blockingStub.getBalance(balanceCheckRequest);
+        balance = this.blockingStub.getBalance(balanceCheckRequest);
+        System.out.println("Received " + balance.getAmount());
+
+        System.out.println("***************");
+        balanceCheckRequest = BalanceCheckRequest.newBuilder()
+                .setAccountNumber(8)
+                .build();
+        balance = this.blockingStub.getBalance(balanceCheckRequest);
         System.out.println("Received " + balance.getAmount());
     }
 }

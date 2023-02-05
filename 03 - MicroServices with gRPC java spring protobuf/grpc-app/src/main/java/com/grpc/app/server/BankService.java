@@ -11,7 +11,7 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         // super.getBalance(request, responseObserver);
         int accountNumber = request.getAccountNumber();
         Balance balance = Balance.newBuilder()
-                .setAmount(accountNumber * 150) // this should generate 150 for id = 1, 300 for id = 2...
+                .setAmount(AccountFakeDb.getBalance(accountNumber)) // this should generate 150 for id = 1, 300 for id = 2...
                 .build();
         responseObserver.onNext(balance);
         responseObserver.onCompleted();
