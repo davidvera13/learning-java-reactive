@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "commons/address.proto";
+import "commons/car.proto";
+
+option java_multiple_files=true;
+option java_package="com.protobuf.app.models";
+
+// v1 of the API
+/*
+message Television {
+  string brand = 1;
+  int32 year = 2;
+}
+ */
+
+// v2: we added some changes in property name
+/*
+message Television {
+  string brand = 1;
+  int32 model = 2;
+  Type type = 3;
+}
+*/
+
+// v3: model year is removed
+/*
+message Television {
+  string brand = 1;
+  // int32 model = 2;
+  Type type = 3;
+}
+*/
+
+// v4: we want to add the price as property
+// if we set price to tag equal to 2, it would be a very bad idea
+// price will be associated to model year from previous versions.
+message Television {
+  string brand = 1;
+
+  // int32 model = 2;
+  // int32 price = 2; // this is a very bad idea!
+  reserved 2;
+  reserved "model", "year";
+
+  Type type = 3;
+  int32 price=4; // the good practice is to add a new tag for this property
+}
+
+// update with v2
+enum Type {
+  HD=0;
+  UHD=1;
+  OLED=2;
+}

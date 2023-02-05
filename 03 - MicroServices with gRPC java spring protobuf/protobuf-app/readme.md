@@ -246,3 +246,24 @@ Why then using names for properties ? It's just for user readability.
 Properties the most frequently used should have the lowest values. 
 For optional values, we can pass high values.
 
+## Versioning classes
+
+![Alt text](img/01.png "Proto files multi versionning")
+
+We can use different versions of the class, as a matter of fact, it won't impact the serialisation or deserialization, as far as we use tags to set properties name.
+As we have tags associated, we must be careful with properties name and fields. If we remove some fields, they may be available or deprecated definitely. Deprecation concern property name and its tag.
+We can explicitly indicate deprecated tags and key names using reserved key word. 
+
+````
+message Television {
+string brand = 1;
+
+// int32 model = 2;
+// int32 price = 2; // this is a very bad idea!
+reserved 2;
+reserved "model", "year";
+
+Type type = 3;
+int32 price=4; // the good practice is to add a new tag for this property
+}
+````
