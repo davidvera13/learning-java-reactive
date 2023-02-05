@@ -15,6 +15,10 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
                 .setAmount(AccountFakeDb.getBalance(accountNumber)) // this should generate 150 for id = 1, 300 for id = 2...
                 .build();
         responseObserver.onNext(balance);
+        // Unary -> can't have more than one onNext
+        // io.grpc.StatusRuntimeException: CANCELLED: RST_STREAM closed stream. HTTP/2 error code: CANCEL
+        // responseObserver.onNext(balance);
+        // responseObserver.onNext(balance);
         responseObserver.onCompleted();
     }
 
