@@ -212,3 +212,37 @@ Wrappers also bring use the has boolean validator.
 System.out.println(client.hasAge());
 ````
 
+### About performance
+
+The Step08JsonVsProtobuf aims to show difference of performance
+````
+json >26
+json > 365ms
+proto >10
+proto > 26ms
+````
+The test shows that same objects have different number of bytes. 
+This element alone doesn't really explain the difference of performance. 
+26 divided by 10 is not equal to 365 divided by 26. The difference is not in proportion.
+
+Json deserialisation works this way: 
+
+````
+"name": "Walter,
+"age": 32
+
+````
+When protobuf maps differently, using associated tag defined in message objects.
+it would look like a little bit like this:
+````
+1= Walter
+2= 32
+````
+
+Why then using names for properties ? It's just for user readability.
+
+1 to 15: 1 byte 
+16 to 20147: 2 bytes
+Properties the most frequently used should have the lowest values. 
+For optional values, we can pass high values.
+
