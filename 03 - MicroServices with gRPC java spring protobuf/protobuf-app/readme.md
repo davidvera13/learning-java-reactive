@@ -93,3 +93,12 @@ For generation:
 | map      | wrapper / empty map |   
 
 
+## Creating package
+
+We can use mvn clean compile and the classes are generated in target folder
+or use 
+
+```
+λ protoc --java_out=./ *.proto
+```
+The classes are generated in the same folder 

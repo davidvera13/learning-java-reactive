@@ -1,0 +1,11 @@
+syntax = "proto3";
+option java_multiple_files=true;
+option java_package="com.protobuf.app.models.commons";
+
+package commons;
+
+message Address {
+  int32 postBox = 1;
+  string street = 2;
+  string city = 3;
+}

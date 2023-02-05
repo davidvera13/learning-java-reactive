@@ -1,6 +1,10 @@
 syntax = "proto3";
+import "commons/address.proto";
+import "commons/car.proto";
+
 option java_multiple_files=true;
 option java_package="com.protobuf.app.models";
+
 
 /*
 Person class
@@ -12,30 +16,30 @@ message Client {
   int32 age = 2;
 
   // composition
-  Address address = 3;
-  repeated Car cars = 4;
+  commons.Address address = 3;
+  repeated commons.Car cars = 4;
 }
 
-message Address {
-  int32 postBox = 1;
-  string street = 2;
-  string city = 3;
-}
-
-message Car {
-  string make = 1;
-  string model = 2;
-  int32 year = 3;
-  BodyStyle bodyStyle=4;
-}
-
-message CarDealer {
-  map<int32 , Car> models=1;
-}
-
-enum BodyStyle {
-  UNDEFINED = 0;
-  SEDAN = 1;
-  COUPE = 2;
-  SUV=3;
-}
+//message Address {
+//  int32 postBox = 1;
+//  string street = 2;
+//  string city = 3;
+//}
+//
+//message Car {
+//  string make = 1;
+//  string model = 2;
+//  int32 year = 3;
+//  BodyStyle bodyStyle=4;
+//}
+//
+//message CarDealer {
+//  map<int32 , Car> models=1;
+//}
+//
+//enum BodyStyle {
+//  UNDEFINED = 0;
+//  SEDAN = 1;
+//  COUPE = 2;
+//  SUV=3;
+//}

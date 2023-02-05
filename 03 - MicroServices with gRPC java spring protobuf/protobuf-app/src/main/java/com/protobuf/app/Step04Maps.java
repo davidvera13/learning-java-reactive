@@ -1,7 +1,7 @@
 package com.protobuf.app;
 
-import com.protobuf.app.models.Car;
-import com.protobuf.app.models.CarDealer;
+import com.protobuf.app.models.commons.Car;
+import com.protobuf.app.models.commons.CarDealer;
 
 public class Step04Maps {
     public static void main(String[] args) {

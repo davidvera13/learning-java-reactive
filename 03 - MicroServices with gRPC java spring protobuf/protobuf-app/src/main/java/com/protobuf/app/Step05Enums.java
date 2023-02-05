@@ -1,11 +1,12 @@
 package com.protobuf.app;
 
-import com.protobuf.app.models.BodyStyle;
-import com.protobuf.app.models.Car;
-import com.protobuf.app.models.CarDealer;
+import com.protobuf.app.models.commons.BodyStyle;
+import com.protobuf.app.models.commons.Car;
+import com.protobuf.app.models.commons.CarDealer;
 
 public class Step05Enums {
     public static void main(String[] args) {
+
 
         CarDealer carDealer = CarDealer.newBuilder()
                 .putModels(2020, Car.newBuilder()

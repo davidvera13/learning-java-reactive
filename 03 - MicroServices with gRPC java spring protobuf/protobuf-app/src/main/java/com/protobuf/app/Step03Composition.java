@@ -1,7 +1,7 @@
 package com.protobuf.app;
 
-import com.protobuf.app.models.Address;
-import com.protobuf.app.models.Car;
+import com.protobuf.app.models.commons.Address;
+import com.protobuf.app.models.commons.Car;
 import com.protobuf.app.models.Client;
 
 import java.util.ArrayList;

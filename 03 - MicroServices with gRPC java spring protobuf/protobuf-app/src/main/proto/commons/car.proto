@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "commons/bodyStyle.proto";
+
+option java_multiple_files=true;
+option java_package="com.protobuf.app.models.commons";
+
+package commons;
+
+
+message Car {
+  string make = 1;
+  string model = 2;
+  int32 year = 3;
+  commons.BodyStyle bodyStyle=4;
+}
+
