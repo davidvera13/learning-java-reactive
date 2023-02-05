@@ -1,6 +1,7 @@
 package com.grpc.app.server;
 
 import com.grpc.models.*;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 public class BankService extends BankServiceGrpc.BankServiceImplBase {
@@ -26,6 +27,13 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
 
         int balance = AccountFakeDb.getBalance(accountNumber);
 
+        if(balance < amount) {
+            Status status = Status.FAILED_PRECONDITION.withDescription("Not enough money .. You only have " + balance);
+            responseObserver.onError(status.asRuntimeException());
+            return;
+        }
+
+        // all validation passed successfully
         for (int i = 0; i < (amount / 10); i++) {
             Money money = Money.newBuilder()
                     .setValue(10)
