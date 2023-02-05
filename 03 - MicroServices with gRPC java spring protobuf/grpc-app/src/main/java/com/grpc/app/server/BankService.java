@@ -1,11 +1,11 @@
 package com.grpc.app.server;
 
-import com.grpc.models.Balance;
-import com.grpc.models.BalanceCheckRequest;
-import com.grpc.models.BankServiceGrpc;
+import com.grpc.models.*;
 import io.grpc.stub.StreamObserver;
 
 public class BankService extends BankServiceGrpc.BankServiceImplBase {
+
+    // unary
     @Override
     public void getBalance(BalanceCheckRequest request, StreamObserver<Balance> responseObserver) {
         // super.getBalance(request, responseObserver);
@@ -17,4 +17,28 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         responseObserver.onCompleted();
     }
 
+    // server-side streaming
+    @Override
+    public void withdraw(WithdrawRequest request, StreamObserver<Money> responseObserver) {
+        // super.withdraw(request, responseObserver);
+        int accountNumber = request.getAccountNumber();
+        int amount = request.getAmount(); // must be 10, 20, 30...
+
+        int balance = AccountFakeDb.getBalance(accountNumber);
+
+        for (int i = 0; i < (amount / 10); i++) {
+            Money money = Money.newBuilder()
+                    .setValue(10)
+                    .build();
+            responseObserver.onNext(money);
+            AccountFakeDb.deductBalance(accountNumber, 10);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        responseObserver.onCompleted();
+
+    }
 }
