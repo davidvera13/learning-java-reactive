@@ -80,7 +80,7 @@ For generation:
 
 ### Default values
 
-| Java     | proto               |
+| Proto    | default values      |
 |----------|---------------------|
 | int32    | 0                   |
 | int64    | 0                   |
@@ -105,3 +105,110 @@ The classes are generated in the same folder
 
 
 ## Creating interfaces and implementation 
+
+To create an interface, we need to create for example 2 messages objects and the interface will be declared this way
+Here oneof means that the credentials interface is implemented by both messages and can be used by one at the time.
+```
+message Credentials {
+  oneof authMode {
+    EmailCredentials emailCredentials=1;
+    PhoneOTP phoneOTP=2;
+  }
+}
+```
+
+## Wrapper types
+
+A proto file must be imported to use wrappers
+```
+import "google/protobuf/wrappers.proto";
+```
+
+| Proto  | Wrapper       |
+|--------|---------------|
+| int32  | Int32Value    |
+| int64  | Int64Value    |
+| float  | FloatValue    |   
+| double | DoubleValue   |
+| bool   | BoolValue     |
+| string | StringValue   |
+| bytes  | BytesValue    |
+|        | UInt32Value   |   
+|        | UInt64Value   |   
+
+
+Example:
+
+````
+message Client {
+// person name
+string name = 1;
+// person age
+//int32 age = 2;
+google.protobuf.Int32Value age = 2;
+
+// composition
+commons.Address address = 3;
+repeated commons.Car cars = 4;
+}
+````
+int32 was replaced with google.protobuf.Int32Value
+Note: if we use wrapper we must also use the constructor: 
+
+The following code should bring a compile error:
+
+````
+        Client client = Client.newBuilder()
+                .setName("Alan")
+                .setAge(25)
+                .setAddress(Address.newBuilder()
+                        .setPostBox(1)
+                        .setStreet("Sesame Street")
+                        .setCity("London")
+                        .build())
+                .addCars(Car.newBuilder()
+                        .setMake("Ford")
+                        .setModel("Mustang")
+                        .setYear(1968)
+                        .build())
+                .addCars(Car.newBuilder()
+                        .setMake("Ashton Martin")
+                        .setModel("DB5")
+                        .setYear(1963)
+                        .build())
+                .build();
+
+````
+
+Correct code should be the following 
+
+````
+Client client = Client.newBuilder()
+        .setName("Alan")
+        .setAge(Int32Value.newBuilder()
+                .setValue(25)
+                .build())
+        .setAddress(Address.newBuilder()
+                .setPostBox(1)
+                .setStreet("Sesame Street")
+                .setCity("London")
+                .build())
+        .addCars(Car.newBuilder()
+                .setMake("Ford")
+                .setModel("Mustang")
+                .setYear(1968)
+                .build())
+        .addCars(Car.newBuilder()
+                .setMake("Ashton Martin")
+                .setModel("DB5")
+                .setYear(1963)
+                .build())
+        .build();
+````
+
+Wrappers also bring use the has boolean validator.
+
+````
+System.out.println(client.hasAge());
+````
+

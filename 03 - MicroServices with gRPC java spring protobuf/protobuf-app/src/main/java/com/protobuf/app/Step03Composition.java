@@ -1,5 +1,6 @@
 package com.protobuf.app;
 
+import com.google.protobuf.Int32Value;
 import com.protobuf.app.models.commons.Address;
 import com.protobuf.app.models.commons.Car;
 import com.protobuf.app.models.Client;
@@ -24,7 +25,9 @@ public class Step03Composition {
 
         Client client = Client.newBuilder()
                 .setName("Alan")
-                .setAge(25)
+                .setAge(Int32Value.newBuilder()
+                        .setValue(25)
+                        .build())
                 .setAddress(Address.newBuilder()
                         .setPostBox(1)
                         .setStreet("Sesame Street")
@@ -44,7 +47,9 @@ public class Step03Composition {
 
         Client client2 =  Client.newBuilder()
                 .setName("Quatermain")
-                .setAge(20)
+                .setAge(Int32Value.newBuilder()
+                        .setValue(20)
+                        .build())
                 .setAddress(Address.newBuilder()
                         .setPostBox(1)
                         .setStreet("Elm Street")
@@ -55,6 +60,8 @@ public class Step03Composition {
 
         System.out.println(client);
         System.out.println(client2);
+
+        System.out.println(client.hasAge());
     }
 }
 
