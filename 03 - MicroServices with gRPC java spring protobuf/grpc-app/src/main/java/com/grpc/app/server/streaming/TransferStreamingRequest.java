@@ -1,5 +1,6 @@
-package com.grpc.app.server;
+package com.grpc.app.server.streaming;
 
+import com.grpc.app.server.setup.AccountFakeDb;
 import com.grpc.models.Account;
 import com.grpc.models.TransferRequest;
 import com.grpc.models.TransferResponse;

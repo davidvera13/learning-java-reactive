@@ -1,5 +1,7 @@
 package com.grpc.app.server;
 
+import com.grpc.app.server.service.BankService;
+import com.grpc.app.server.service.TransferService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

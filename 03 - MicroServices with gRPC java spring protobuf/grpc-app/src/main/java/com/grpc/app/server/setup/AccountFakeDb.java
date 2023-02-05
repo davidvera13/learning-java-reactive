@@ -1,4 +1,4 @@
-package com.grpc.app.server;
+package com.grpc.app.server.setup;
 
 import java.util.Map;
 import java.util.function.Function;

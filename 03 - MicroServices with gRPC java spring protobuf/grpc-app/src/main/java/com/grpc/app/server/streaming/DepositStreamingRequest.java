@@ -1,5 +1,6 @@
-package com.grpc.app.server;
+package com.grpc.app.server.streaming;
 
+import com.grpc.app.server.setup.AccountFakeDb;
 import com.grpc.models.Balance;
 import com.grpc.models.DepositRequest;
 import io.grpc.stub.StreamObserver;
