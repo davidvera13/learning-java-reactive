@@ -1,7 +1,7 @@
-package com.grpc.app.server;
+package com.grpc.app.server.rpctypes;
 
-import com.grpc.app.server.service.BankService;
-import com.grpc.app.server.service.TransferService;
+import com.grpc.app.server.rpctypes.service.BankService;
+import com.grpc.app.server.rpctypes.service.TransferService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 

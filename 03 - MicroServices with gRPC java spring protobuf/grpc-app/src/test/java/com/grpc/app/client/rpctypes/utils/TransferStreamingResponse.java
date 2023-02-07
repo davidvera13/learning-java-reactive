@@ -1,4 +1,4 @@
-package com.grpc.app.client.utils;
+package com.grpc.app.client.rpctypes.utils;
 
 
 import com.grpc.models.TransferResponse;

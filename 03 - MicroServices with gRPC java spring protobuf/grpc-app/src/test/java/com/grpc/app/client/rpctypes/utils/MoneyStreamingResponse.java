@@ -1,8 +1,6 @@
-package com.grpc.app.client.utils;
+package com.grpc.app.client.rpctypes.utils;
 
 import com.grpc.models.Money;
-import io.grpc.Status;
-import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 
 import java.util.concurrent.CountDownLatch;

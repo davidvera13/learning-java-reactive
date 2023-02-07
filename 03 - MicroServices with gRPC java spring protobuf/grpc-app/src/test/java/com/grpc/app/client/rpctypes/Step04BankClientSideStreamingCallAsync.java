@@ -1,7 +1,6 @@
-package com.grpc.app.client;
+package com.grpc.app.client.rpctypes;
 
-import com.grpc.app.client.utils.BalanceStreamObserver;
-import com.grpc.app.client.utils.MoneyStreamingResponse;
+import com.grpc.app.client.rpctypes.utils.BalanceStreamObserver;
 import com.grpc.models.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

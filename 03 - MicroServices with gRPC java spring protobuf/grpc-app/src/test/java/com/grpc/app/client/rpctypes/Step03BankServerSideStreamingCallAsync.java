@@ -1,22 +1,17 @@
-package com.grpc.app.client;
+package com.grpc.app.client.rpctypes;
 
-import com.google.common.util.concurrent.Uninterruptibles;
-import com.grpc.app.client.utils.MoneyStreamingResponse;
+import com.grpc.app.client.rpctypes.utils.MoneyStreamingResponse;
 import com.grpc.models.Balance;
 import com.grpc.models.BalanceCheckRequest;
 import com.grpc.models.BankServiceGrpc;
 import com.grpc.models.WithdrawRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
-import org.checkerframework.checker.units.qual.C;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

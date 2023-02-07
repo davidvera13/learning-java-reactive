@@ -1,4 +1,4 @@
-package com.grpc.app.client;
+package com.grpc.app.client.rpctypes;
 
 import com.grpc.models.Balance;
 import com.grpc.models.BalanceCheckRequest;

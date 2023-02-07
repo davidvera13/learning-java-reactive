@@ -1,7 +1,7 @@
-package com.grpc.app.server.service;
+package com.grpc.app.server.rpctypes.service;
 
-import com.grpc.app.server.setup.AccountFakeDb;
-import com.grpc.app.server.streaming.TransferStreamingRequest;
+import com.grpc.app.server.rpctypes.setup.AccountFakeDb;
+import com.grpc.app.server.rpctypes.streaming.TransferStreamingRequest;
 import com.grpc.models.TransferRequest;
 import com.grpc.models.TransferResponse;
 import com.grpc.models.TransferServiceGrpc;

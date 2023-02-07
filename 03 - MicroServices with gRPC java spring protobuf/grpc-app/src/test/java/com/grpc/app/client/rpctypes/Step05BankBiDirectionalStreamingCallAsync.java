@@ -1,9 +1,6 @@
-package com.grpc.app.client;
+package com.grpc.app.client.rpctypes;
 
-import com.grpc.app.client.utils.BalanceStreamObserver;
-import com.grpc.app.client.utils.TransferStreamingResponse;
-import com.grpc.models.BankServiceGrpc;
-import com.grpc.models.DepositRequest;
+import com.grpc.app.client.rpctypes.utils.TransferStreamingResponse;
 import com.grpc.models.TransferRequest;
 import com.grpc.models.TransferServiceGrpc;
 import io.grpc.ManagedChannel;
