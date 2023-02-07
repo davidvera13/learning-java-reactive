@@ -1,28 +1,41 @@
 package com.grpc.app.client.loadbalancing;
 
 import com.grpc.app.client.rpctypes.utils.BalanceStreamObserver;
-import com.grpc.app.client.rpctypes.utils.MoneyStreamingResponse;
-import com.grpc.models.*;
+import com.grpc.app.server.loadbalancing.config.AppNameResolverProvider;
+import com.grpc.app.server.loadbalancing.config.ServiceRegistry;
+import com.grpc.models.Balance;
+import com.grpc.models.BalanceCheckRequest;
+import com.grpc.models.BankServiceGrpc;
+import com.grpc.models.DepositRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.NameResolverRegistry;
 import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class Step08BankServerSideLoadBalancingNonBlocking {
+public class Step09ClientSideLoadBalancing {
     private BankServiceGrpc.BankServiceBlockingStub blockingStub;
     private BankServiceGrpc.BankServiceStub bankServiceStub;
 
     @BeforeAll
     public void setup() {
         // we create a channel for communication
-         ManagedChannel managedChannel = ManagedChannelBuilder
-                 .forAddress("localhost", 8585)
+        // run with Lb1GrpcServer, Lb2GrpcServer
+        ServiceRegistry.register("bank-service", List.of("localhost:5678", "localhost:6789"));
+        NameResolverRegistry.getDefaultRegistry().register(new AppNameResolverProvider());
+
+
+
+        ManagedChannel managedChannel = ManagedChannelBuilder
+                .forTarget("http://bank-service")
+                .defaultLoadBalancingPolicy("round_robin")
                 .usePlaintext()
                 .build();
 
