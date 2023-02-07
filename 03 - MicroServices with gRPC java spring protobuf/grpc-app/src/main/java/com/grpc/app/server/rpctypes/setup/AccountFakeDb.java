@@ -16,7 +16,7 @@ public class AccountFakeDb {
     private static final Map<Integer, Integer> MAP = IntStream
             .rangeClosed(1, 10)
             .boxed()
-            .collect(Collectors.toMap(Function.identity(), balance -> balance * 10));
+            .collect(Collectors.toMap(Function.identity(), balance -> balance * 100));
 
     public static int getBalance(int accountId) {
         return MAP.get(accountId);
