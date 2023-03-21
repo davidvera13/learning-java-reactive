@@ -6,6 +6,7 @@ import io.rsocket.core.RSocketConnector;
 import io.rsocket.transport.netty.client.TcpClientTransport;
 import io.rsocket.util.DefaultPayload;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import reactor.core.publisher.Mono;
@@ -37,4 +38,16 @@ public class Lec01RSocketClientTest {
                 .create(mono)
                 .verifyComplete();
     }
+
+    // SocketAcceptorImpl > accept() called is printed one time
+    @RepeatedTest(13)
+    public void fireAndForgetRepeated() {
+        Payload payload = DefaultPayload.create("Hello world!");
+        Mono<Void> mono = this.rSocket.fireAndForget(payload);
+
+        StepVerifier
+                .create(mono)
+                .verifyComplete();
+    }
+
 }
