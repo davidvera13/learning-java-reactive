@@ -1,4 +1,4 @@
-package org.example.rsocket.lec01;
+package org.example.rsocket;
 
 import io.rsocket.Payload;
 import io.rsocket.RSocket;
@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class Lec01RSocketClientTest {
+public class Lec01RSocketClientFireAndForgetTest {
     private RSocket rSocket;
     private RSocket rSocketSlow;
     private RSocket rSocketObjects;

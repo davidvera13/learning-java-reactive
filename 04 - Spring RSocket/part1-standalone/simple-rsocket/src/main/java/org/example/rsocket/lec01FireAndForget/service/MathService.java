@@ -1,4 +1,4 @@
-package org.example.rsocket.lec01.service;
+package org.example.rsocket.lec01FireAndForget.service;
 
 import io.rsocket.Payload;
 import io.rsocket.RSocket;

@@ -1,9 +1,9 @@
-package org.example.rsocket.lec01;
+package org.example.rsocket.lec01FireAndForget;
 
 import io.rsocket.core.RSocketServer;
 import io.rsocket.transport.netty.server.CloseableChannel;
 import io.rsocket.transport.netty.server.TcpServerTransport;
-import org.example.rsocket.lec01.service.SocketAcceptorImpl;
+import org.example.rsocket.lec01FireAndForget.service.SocketAcceptorImpl;
 
 public class AppServer {
     public static void main(String[] args) {
