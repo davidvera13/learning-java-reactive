@@ -15,6 +15,7 @@ import reactor.test.StepVerifier;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Lec01RSocketClientTest {
     private RSocket rSocket;
+    private RSocket rSocketSlow;
 
     @BeforeAll
     public void setup() {
@@ -23,6 +24,10 @@ public class Lec01RSocketClientTest {
         // basic client creation
         this.rSocket = RSocketConnector.create()
                 .connect(TcpClientTransport.create("localhost", 6565))
+                .block();
+
+        this.rSocketSlow = RSocketConnector.create()
+                .connect(TcpClientTransport.create("localhost", 6464))
                 .block();
     }
 
@@ -44,6 +49,29 @@ public class Lec01RSocketClientTest {
     public void fireAndForgetRepeated() {
         Payload payload = DefaultPayload.create("Hello world!");
         Mono<Void> mono = this.rSocket.fireAndForget(payload);
+
+        StepVerifier
+                .create(mono)
+                .verifyComplete();
+    }
+
+    @Test
+    public void fireAndForgetSleep() {
+
+        Payload payload = DefaultPayload.create("Hello world!");
+        Mono<Void> mono = this.rSocket.fireAndForget(payload);
+
+        StepVerifier
+                .create(mono)
+                .verifyComplete();
+    }
+
+
+    // the tests are completed before the results are displayed in server side. 
+    @RepeatedTest(3)
+    public void fireAndForgetRepeatedSlow() {
+        Payload payload = DefaultPayload.create("Hello world!");
+        Mono<Void> mono = this.rSocketSlow.fireAndForget(payload);
 
         StepVerifier
                 .create(mono)
