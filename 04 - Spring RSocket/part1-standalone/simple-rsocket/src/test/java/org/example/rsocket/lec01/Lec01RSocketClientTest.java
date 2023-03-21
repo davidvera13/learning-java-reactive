@@ -5,6 +5,8 @@ import io.rsocket.RSocket;
 import io.rsocket.core.RSocketConnector;
 import io.rsocket.transport.netty.client.TcpClientTransport;
 import io.rsocket.util.DefaultPayload;
+import org.example.rsocket.commons.dto.RequestDto;
+import org.example.rsocket.commons.helper.Utils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import reactor.test.StepVerifier;
 public class Lec01RSocketClientTest {
     private RSocket rSocket;
     private RSocket rSocketSlow;
+    private RSocket rSocketObjects;
 
     @BeforeAll
     public void setup() {
@@ -28,6 +31,10 @@ public class Lec01RSocketClientTest {
 
         this.rSocketSlow = RSocketConnector.create()
                 .connect(TcpClientTransport.create("localhost", 6464))
+                .block();
+
+        this.rSocketObjects = RSocketConnector.create()
+                .connect(TcpClientTransport.create("localhost", 6363))
                 .block();
     }
 
@@ -67,11 +74,34 @@ public class Lec01RSocketClientTest {
     }
 
 
-    // the tests are completed before the results are displayed in server side. 
+    // the tests are completed before the results are displayed in server side.
     @RepeatedTest(3)
     public void fireAndForgetRepeatedSlow() {
         Payload payload = DefaultPayload.create("Hello world!");
         Mono<Void> mono = this.rSocketSlow.fireAndForget(payload);
+
+        StepVerifier
+                .create(mono)
+                .verifyComplete();
+    }
+
+
+    // we can pass objects to a payloas
+    @RepeatedTest(3)
+    public void fireAndForgetUsingObject() {
+        Payload payload = Utils.toPayload(new RequestDto(42));
+        Mono<Void> mono = this.rSocketObjects.fireAndForget(payload);
+
+        StepVerifier
+                .create(mono)
+                .verifyComplete();
+    }
+
+    // if we don't map it to object, we pass a json
+    @RepeatedTest(3)
+    public void fireAndForgetUsingObjectAlternative() {
+        Payload payload = Utils.toPayload(new RequestDto(42));
+        Mono<Void> mono = this.rSocket.fireAndForget(payload);
 
         StepVerifier
                 .create(mono)
