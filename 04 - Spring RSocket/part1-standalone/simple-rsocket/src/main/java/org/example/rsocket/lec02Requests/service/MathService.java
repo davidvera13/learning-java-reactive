@@ -5,7 +5,10 @@ import io.rsocket.RSocket;
 import org.example.rsocket.commons.dto.RequestDto;
 import org.example.rsocket.commons.dto.ResponseDto;
 import org.example.rsocket.commons.helper.Utils;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.time.Duration;
 
 public class MathService implements RSocket {
     // implement request and response
@@ -17,5 +20,20 @@ public class MathService implements RSocket {
             ResponseDto responseDto = new ResponseDto(requestDto.getInput(), (int) Math.pow(requestDto.getInput(), 2));
             return Utils.toPayload(responseDto);
         });
+    }
+
+    // returns a flux of payloads
+    @Override
+    public Flux<Payload> requestStream(Payload payload) {
+        RequestDto requestDto = Utils.toObject(payload, RequestDto.class);
+        return Flux.range(1, 10)
+                .map(integer -> integer * requestDto.getInput())
+                .map(integer -> new ResponseDto(requestDto.getInput(), integer))
+                .delayElements(Duration.ofSeconds(1)) // let's assume it's a time consuming process
+                .doOnNext(System.out::println)
+
+                .doFinally(s -> System.out.println(s))
+                .map(Utils::toPayload);
+        // return RSocket.super.requestStream(payload);
     }
 }

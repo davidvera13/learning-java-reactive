@@ -10,6 +10,7 @@ import org.example.rsocket.commons.helper.Utils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -38,5 +39,33 @@ public class Lec02RSocketClientRequestsTest {
                 .expectNextCount(1)
                 .verifyComplete();
     }
+
+    @Test
+    public void requestStream() {
+        Payload payload = Utils.toPayload(new RequestDto(5));
+        Flux<ResponseDto> flux = this.rSocket.requestStream(payload)
+                .map(responsePayload -> Utils.toObject(responsePayload, ResponseDto.class))
+                .doOnNext(System.out::println);
+
+        StepVerifier
+                .create(flux)
+                .expectNextCount(10)
+                .verifyComplete();
+    }
+
+    @Test
+    public void requestStreamTakeNthElements() {
+        Payload payload = Utils.toPayload(new RequestDto(5));
+        Flux<ResponseDto> flux = this.rSocket.requestStream(payload)
+                .map(responsePayload -> Utils.toObject(responsePayload, ResponseDto.class))
+                .doOnNext(System.out::println)
+                .take(5);  // will take nfirst elements;
+
+        StepVerifier
+                .create(flux)
+                .expectNextCount(5)
+                .verifyComplete();
+    }
+
 
 }
