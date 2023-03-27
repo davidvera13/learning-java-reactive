@@ -3,6 +3,7 @@ package com.example.springrsocket.service;
 import com.example.springrsocket.shared.dto.ChartResponseDto;
 import com.example.springrsocket.shared.dto.ComputationRequestDto;
 import com.example.springrsocket.shared.dto.ComputationResponseDto;
+import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -18,4 +19,6 @@ public interface MathService {
 
     // request channel
     Flux<ChartResponseDto> chartStream(Flux<ComputationRequestDto> requestDtoFlux);
+
+    Flux<ComputationResponseDto> tableStream(ComputationRequestDto requestDto);
 }

@@ -40,6 +40,14 @@ public class MathController {
                 .flatMapMany(this.mathService::multiplicationTableStream);
     }
 
+    // request stream
+    @MessageMapping("math.service.tableStream")
+    public Flux<ComputationResponseDto> tableStream(Mono<ComputationRequestDto> requestDtoMono) {
+        // Mono must be converted to flux
+        return requestDtoMono
+                .flatMapMany(this.mathService::tableStream);
+    }
+
     // request channel
     @MessageMapping("math.service.chartStream")
     public Flux<ChartResponseDto> chartStream(Flux<ComputationRequestDto> requestDtoFlux) {

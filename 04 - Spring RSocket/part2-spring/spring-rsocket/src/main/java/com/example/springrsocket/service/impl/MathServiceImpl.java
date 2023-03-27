@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+
 @Service
 public class MathServiceImpl implements MathService {
     // fire and forget
@@ -30,6 +32,13 @@ public class MathServiceImpl implements MathService {
     @Override
     public Flux<ComputationResponseDto> multiplicationTableStream(ComputationRequestDto requestDto) {
         return Flux.range(0, 10)
+                .map(i -> new ComputationResponseDto(requestDto.getInput(), requestDto.getInput() * i));
+    }
+
+    @Override
+    public Flux<ComputationResponseDto> tableStream(ComputationRequestDto requestDto) {
+        return Flux.range(0, 10000)
+                .delayElements(Duration.ofSeconds(1))
                 .map(i -> new ComputationResponseDto(requestDto.getInput(), requestDto.getInput() * i));
     }
 
