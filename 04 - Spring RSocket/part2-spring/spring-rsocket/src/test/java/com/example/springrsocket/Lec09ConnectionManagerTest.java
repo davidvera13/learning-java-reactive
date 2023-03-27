@@ -34,6 +34,10 @@ public class Lec09ConnectionManagerTest {
         RSocketRequester r2 = this.builder
                 .transport(TcpClientTransport.create("localhost", 6565));
 
+        RSocketRequester r3 = this.builder
+                .setupRoute("math.events.connection")
+                .transport(TcpClientTransport.create("localhost", 6565));
+
         r1.route("math.service.print")
                 .data(new ComputationRequestDto(12))
                 .send()
@@ -41,6 +45,11 @@ public class Lec09ConnectionManagerTest {
 
         r2.route("math.service.print")
                 .data(new ComputationRequestDto(13))
+                .send()
+                .subscribe();
+
+        r3.route("math.service.print")
+                .data(new ComputationRequestDto(14))
                 .send()
                 .subscribe();
 

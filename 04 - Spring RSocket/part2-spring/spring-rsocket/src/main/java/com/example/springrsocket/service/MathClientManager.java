@@ -22,9 +22,16 @@ public class MathClientManager {
                     this.set.remove(rSocketRequester);
                 }).subscribe();
     }
+    // notify every seconds
+//    @Scheduled(fixedRate = 1000)
+//    public void print() {
+//        System.out.println(set);
+//    }
 
-    @Scheduled(fixedRate = 1000)
-    public void print() {
-        System.out.println(set);
+    // notify when update occurs
+    public void notify(int i) {
+        Flux.fromIterable(set)
+                .flatMap(r ->r.route("math.updates").data(i).send())
+                .subscribe();
     }
 }

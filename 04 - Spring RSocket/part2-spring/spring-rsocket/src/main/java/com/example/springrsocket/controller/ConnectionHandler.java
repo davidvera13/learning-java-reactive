@@ -61,4 +61,13 @@ public class ConnectionHandler {
            this.mathClientManager.add(requester);
         });
     }
+
+
+    @ConnectMapping("math.events.connection")
+    public Mono<Void> handleConnectionUpdates(RSocketRequester requester) {
+        System.out.println("Events Connection setup");
+        return Mono.fromRunnable(() -> {
+            this.mathClientManager.add(requester);
+        });
+    }
 }
