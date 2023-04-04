@@ -11,3 +11,4 @@
 **/.gradle
 **/.gradle
 04 - Spring RSocket/**/build
+04 - Spring RSocket/part3-usecase/docker/data/dbstore

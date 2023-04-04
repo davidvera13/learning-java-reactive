@@ -1,5 +1,5 @@
 package com.example.user.domain.enums;
 
-public enum TransactionType {
-    CREDIT, DEBIT
+public enum TransactionStatus {
+    COMPLETED, FAILED
 }

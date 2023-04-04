@@ -1,2 +1,5 @@
-package com.example.user.domain;public enum TransactionType {
+package com.example.user.domain.enums;
+
+public enum TransactionType {
+    CREDIT, DEBIT
 }
